@@ -111,3 +111,5 @@ docker compose exec backend python -c "import sqlite3; c=sqlite3.connect('/data/
 ```bash
 docker compose exec backend python -c "import sqlite3; c=sqlite3.connect('/data/portal.db'); print(c.execute(\"select name from sqlite_master where type='table'\").fetchall())"
 ```
+
+Git練習用の追記です
