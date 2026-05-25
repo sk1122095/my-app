@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mock Company Portal</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <p class="eyebrow">Internal Portal</p>
+        <h1>社内ポータル</h1>
+        <p class="lead">勤務情報、社内連絡、ITサポートをまとめて確認できます。</p>
+      </div>
+      <div class="header-actions">
+        <div class="user-chip">
+          <span class="user-avatar">佐</span>
+          <div>
+            <strong>佐藤 葵</strong>
+            <small>Corporate IT</small>
+          </div>
+        </div>
+        <div id="health" class="status">API 確認中</div>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="hero-grid">
+        <article class="work-card">
+          <div>
+            <p class="eyebrow">Today</p>
+            <h2>本日の勤務</h2>
+          </div>
+          <div class="work-time">
+            <strong>09:00 - 18:00</strong>
+            <span>通常勤務 / リモート</span>
+          </div>
+          <div class="work-progress" aria-label="勤務時間の進捗">
+            <span style="width: 62%"></span>
+          </div>
+          <div class="work-meta">
+            <span>打刻済み 09:02</span>
+            <span>休憩 12:00 - 13:00</span>
+          </div>
+        </article>
+
+        <section class="quick-links" aria-label="クイックリンク">
+          <a href="#" class="quick-link">
+            <span>勤</span>
+            <strong>勤怠</strong>
+            <small>打刻・休暇</small>
+          </a>
+          <a href="#" class="quick-link">
+            <span>経</span>
+            <strong>経費</strong>
+            <small>申請・精算</small>
+          </a>
+          <a href="#" class="quick-link">
+            <span>Wiki</span>
+            <strong>社内Wiki</strong>
+            <small>手順・規程</small>
+          </a>
+          <a href="#" class="quick-link">
+            <span>申</span>
+            <strong>申請</strong>
+            <small>稟議・依頼</small>
+          </a>
+        </section>
+      </section>
+
+      <section class="summary-grid" aria-label="サマリー">
+        <article class="summary-card">
+          <span class="summary-label">お知らせ</span>
+          <strong id="announcement-count">-</strong>
+          <small>全社共有</small>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">社員</span>
+          <strong id="employee-count">-</strong>
+          <small>登録メンバー</small>
+        </article>
+        <article class="summary-card urgent">
+          <span class="summary-label">未対応</span>
+          <strong id="open-ticket-count">-</strong>
+          <small>対応待ちチケット</small>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">高優先度</span>
+          <strong id="high-priority-count">-</strong>
+          <small>注意が必要</small>
+        </article>
+      </section>
+
+      <div class="portal-layout">
+        <section class="panel announcements">
+          <div class="section-heading">
+            <div>
+              <h2>お知らせ</h2>
+              <p>最新の社内アナウンス</p>
+            </div>
+            <span>全社共有</span>
+          </div>
+          <div id="announcements" class="stack"></div>
+        </section>
+
+        <aside class="side-column">
+          <section class="panel compact">
+            <div class="section-heading">
+              <div>
+                <h2>今週の予定</h2>
+                <p>主なイベント</p>
+              </div>
+              <span>Schedule</span>
+            </div>
+            <div class="timeline">
+              <article>
+                <time>月 10:00</time>
+                <strong>営業定例</strong>
+                <span>オンライン</span>
+              </article>
+              <article>
+                <time>水 14:00</time>
+                <strong>セキュリティ研修</strong>
+                <span>大会議室A</span>
+              </article>
+              <article>
+                <time>金 15:00</time>
+                <strong>全社会</strong>
+                <span>ライブ配信</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel compact">
+            <div class="section-heading">
+              <div>
+                <h2>システム状態</h2>
+                <p>社内サービス稼働状況</p>
+              </div>
+              <span>Status</span>
+            </div>
+            <div class="system-list">
+              <div><span class="dot good"></span> API Gateway <strong>正常</strong></div>
+              <div><span class="dot good"></span> SQLite DB <strong>正常</strong></div>
+              <div><span class="dot warn"></span> VPN <strong>メンテ予定</strong></div>
+              <div><span class="dot good"></span> SSO <strong>正常</strong></div>
+            </div>
+          </section>
+        </aside>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <h2>社員一覧</h2>
+              <p>部署と連絡先</p>
+            </div>
+            <span>Directory</span>
+          </div>
+          <div id="employees" class="employee-grid"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <h2>IT サポート</h2>
+              <p>問い合わせチケット</p>
+            </div>
+            <span>Tickets</span>
+          </div>
+          <form id="ticket-form" class="ticket-form">
+            <label>
+              件名
+              <input name="title" type="text" placeholder="例: プリンターに接続できない" required />
+            </label>
+            <label>
+              担当
+              <input name="owner" type="text" placeholder="例: 佐藤 葵" required />
+            </label>
+            <label>
+              優先度
+              <select name="priority" required>
+                <option value="中">中</option>
+                <option value="高">高</option>
+                <option value="低">低</option>
+              </select>
+            </label>
+            <button type="submit">追加</button>
+            <p id="ticket-message" class="form-message" aria-live="polite"></p>
+          </form>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>件名</th>
+                  <th>担当</th>
+                  <th>状態</th>
+                  <th>優先度</th>
+                </tr>
+              </thead>
+              <tbody id="tickets"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
