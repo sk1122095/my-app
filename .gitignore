@@ -1,1 +1,3 @@
 docs-local/
+__pycache__/
+*.pyc
